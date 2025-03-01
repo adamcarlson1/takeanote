@@ -1,4 +1,4 @@
-/* static/js/scripts.js */
+// static/js/scripts.js
 
 document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("video-input");

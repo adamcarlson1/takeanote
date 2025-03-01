@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Lecture App - Hyperspace</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1>Lecture App</h1>
+            <p>Upload lecture videos and generate notes & quizzes instantly.</p>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+            <section>
+                <h2>Upload Lecture Video</h2>
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="video" id="video-input" accept="video/*" required>
+                    <label for="video-input" class="button">Select Video</label>
+                    <input type="submit" value="Upload & Process" class="primary">
+                </form>
+            </section>
+
+            {% if transcription %}
+            <section class="transcription">
+                <h2>Lecture Transcription</h2>
+                <p>{{ transcription }}</p>
+            </section>
+            {% endif %}
+
+            {% if notes %}
+            <section class="notes-section">
+                <h2>Lecture Notes</h2>
+                <p>{{ notes.detailed_notes }}</p>
+            </section>
+            {% endif %}
+
+            {% if quiz %}
+            <section class="quiz-section">
+                <h2>Quiz Questions</h2>
+                <ul>
+                    {% for question in quiz %}
+                    <li>{{ question }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p>&copy; 2025 Lecture App. Built with Hyperspace.</p>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
