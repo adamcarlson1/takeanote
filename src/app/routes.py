@@ -9,6 +9,7 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
+    print('Entered index')
     if request.method == 'POST':
         video = request.files.get('video')
         if not video or video.filename == '':
@@ -40,6 +41,7 @@ def index():
 
 @bp.route('/results', methods=['GET'])
 def results():
+    print('Entered results')
     transcription = session.get('transcription')
     notes = session.get('notes')
     quiz = session.get('quiz')
@@ -53,6 +55,7 @@ def results():
 
 @bp.route('/quiz', methods=['GET'])
 def quiz_page():
+    print('Entered quiz')
     quiz = session.get('quiz', [])
     return render_template('quiz.html', quiz=quiz)
 

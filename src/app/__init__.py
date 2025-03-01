@@ -1,19 +1,30 @@
-from flask import Flask
 import os
+from flask import Flask, session
+from flask_session import Session
 
 def create_app():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-
+    # Determine the base directory (which is 'src')
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    
     app = Flask(
         __name__,
-        template_folder=os.path.join(base_dir, '..', 'templates'),
-        static_folder=os.path.join(base_dir, '..', 'static')
+        template_folder=os.path.join(base_dir, 'templates'),
+        static_folder=os.path.join(base_dir, 'static')
     )
+    
+    # Set up configuration
+    app.config['UPLOAD_FOLDER'] = os.path.join(base_dir, 'data', 'uploads')
+    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['PERMANENT_SESSION_LIFETIME'] = 3600
 
-    app.config['UPLOAD_FOLDER'] = os.path.join(base_dir, '..', 'data', 'uploads')
-    app.secret_key = 'your_secret_key_here'  # Change this to a secure key
-
-    from .routes import bp as main_bp
-    app.register_blueprint(main_bp)
-
+    # Configure Flask-Session to store sessions in the filesystem
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_FILE_DIR'] = os.path.join(base_dir, 'data', 'session_files')
+    os.makedirs(app.config['SESSION_FILE_DIR'], exist_ok=True)
+    Session(app)
+    
+    # Register Blueprints
+    from .routes import bp
+    app.register_blueprint(bp)
+    
     return app

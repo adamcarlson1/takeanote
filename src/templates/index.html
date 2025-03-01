@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Take-A-Note</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    /* Preserve custom styling for the file upload button */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+    }
+    /* Hide the default file input */
+    .upload-form input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">
@@ -19,11 +34,23 @@
       <!-- Upload Section -->
       <section class="upload-section">
         <h2>Upload Lecture Video</h2>
-        <form action="{{ url_for('main.index') }}" method="post" enctype="multipart/form-data" class="upload-form">
+        
+        <!-- Display flash messages, if any -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('main.index') }}" method="POST" enctype="multipart/form-data" class="upload-form">
           <label for="video-input" class="custom-file-upload" id="file-label">
-            <span>Select Video</span>
-            <input type="file" name="video" id="video-input" accept="video/*" required>
+            <span id="file-label-text">Select Video</span>
           </label>
+          <input type="file" name="video" id="video-input" accept="video/*" required>
           <button type="submit" class="button primary">Upload &amp; Process</button>
         </form>
       </section>
@@ -42,5 +69,12 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script>
+    // Update the custom file button label with the selected file name.
+    document.getElementById('video-input').addEventListener('change', function(e) {
+      var fileName = e.target.files.length > 0 ? e.target.files[0].name : 'Select Video';
+      document.getElementById('file-label-text').textContent = fileName;
+    });
+  </script>
 </body>
 </html>
