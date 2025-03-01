@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, current_app, redirect, flash, url_for, session
 import os
 from .transcription import transcribe_video
-from .summarization import generate_notes
+from .summarization import TranscriptSummarizer
 from .quiz_generator import generate_quiz
-import sys  # Debugging prints
+import sys  # Debug prints
 
 bp = Blueprint('main', __name__)
 
@@ -22,10 +22,23 @@ def index():
         video.save(video_path)
 
         print("✅ Video uploaded successfully. Processing...", file=sys.stderr)
-
-        # Dummy Processing
+        
+        # Transcribe the video
         transcription = transcribe_video(video_path)
-        notes = generate_notes(transcription)
+        
+        # Check for transcription errors
+        if "failed" in transcription.lower():
+            flash("Error during transcription: " + transcription, "error")
+            session['transcription'] = transcription
+            session['notes'] = {"detailed_notes": "No summary available due to transcription error."}
+            session['quiz'] = []
+            return redirect(url_for('main.results'))
+        
+        # If transcription succeeded, generate summary and quiz
+        summarizer = TranscriptSummarizer()
+        cleaned_transcript = summarizer.clean_transcript(transcription)
+        summary_text = summarizer.generate_summary(cleaned_transcript)
+        notes = {"detailed_notes": summary_text}
         quiz = generate_quiz(notes["detailed_notes"])
 
         session['transcription'] = transcription
@@ -33,8 +46,7 @@ def index():
         session['quiz'] = quiz
 
         print("✅ Redirecting to results page...", file=sys.stderr)
-
-        return redirect(url_for('main.results'))  # Ensure correct redirect
+        return redirect(url_for('main.results'))
 
     return render_template('index.html')
 
@@ -58,4 +70,3 @@ def quiz_page():
     print('Entered quiz')
     quiz = session.get('quiz', [])
     return render_template('quiz.html', quiz=quiz)
-
