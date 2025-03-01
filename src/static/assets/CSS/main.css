@@ -1,0 +1,41 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #1e1f26;
+    color: #ffffff;
+  }
+  
+  /* Button styling */
+  button, .button {
+    background: linear-gradient(90deg, #0084ff, #00ccff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover, .button:hover {
+    background: linear-gradient(90deg, #0066cc, #0084ff);
+  }
+  
+  /* Header */
+  #header {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  /* Section Layout */
+  section {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Footer */
+  #footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+  }
