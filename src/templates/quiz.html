@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz - Take-A-Note</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <h1 class="title">Quiz Time</h1>
+      <p class="subtitle">Test your knowledge based on the lecture.</p>
+    </header>
+
+    <!-- Quiz Content -->
+    <div id="main">
+      <section class="output-section">
+        <h2>Quiz Questions</h2>
+        {% if quiz %}
+        <ul class="quiz-list">
+          {% for question in quiz %}
+          <li class="quiz-item">{{ question }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No quiz questions available. Please upload and process a video first.</p>
+        {% endif %}
+      </section>
+      <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <p>&copy; 2025 Take-A-Note. Built with Hyperspace.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

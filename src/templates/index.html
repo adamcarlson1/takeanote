@@ -1,68 +1,80 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Lecture App - Hyperspace</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Take-A-Note</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    /* Preserve custom styling for the file upload button */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+    }
+    /* Hide the default file input */
+    .upload-form input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
-<body class="is-preload">
+<body>
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <h1 class="title">Take-A-Note</h1>
+      <p class="subtitle">Upload lecture videos and generate notes &amp; quizzes instantly.</p>
+    </header>
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+    <!-- Main Content -->
+    <div id="main">
+      <!-- Upload Section -->
+      <section class="upload-section">
+        <h2>Upload Lecture Video</h2>
+        
+        <!-- Display flash messages, if any -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('main.index') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+          <label for="video-input" class="custom-file-upload" id="file-label">
+            <span id="file-label-text">Select Video</span>
+          </label>
+          <input type="file" name="video" id="video-input" accept="video/*" required>
+          <button type="submit" class="button primary">Upload &amp; Process</button>
+        </form>
+      </section>
 
-        <!-- Header -->
-        <header id="header">
-            <h1>Lecture App</h1>
-            <p>Upload lecture videos and generate notes & quizzes instantly.</p>
-        </header>
-
-        <!-- Main -->
-        <div id="main">
-            <section>
-                <h2>Upload Lecture Video</h2>
-                <form action="/" method="post" enctype="multipart/form-data">
-                    <input type="file" name="video" id="video-input" accept="video/*" required>
-                    <label for="video-input" class="button">Select Video</label>
-                    <input type="submit" value="Upload & Process" class="primary">
-                </form>
-            </section>
-
-            {% if transcription %}
-            <section class="transcription">
-                <h2>Lecture Transcription</h2>
-                <p>{{ transcription }}</p>
-            </section>
-            {% endif %}
-
-            {% if notes %}
-            <section class="notes-section">
-                <h2>Lecture Notes</h2>
-                <p>{{ notes.detailed_notes }}</p>
-            </section>
-            {% endif %}
-
-            {% if quiz %}
-            <section class="quiz-section">
-                <h2>Quiz Questions</h2>
-                <ul>
-                    {% for question in quiz %}
-                    <li>{{ question }}</li>
-                    {% endfor %}
-                </ul>
-            </section>
-            {% endif %}
-        </div>
-
-        <!-- Footer -->
-        <footer id="footer">
-            <p>&copy; 2025 Lecture App. Built with Hyperspace.</p>
-        </footer>
-
+      <!-- Loading Indicator -->
+      <div id="loading-indicator" class="loading-indicator" style="display: none;">
+        <p>Processing your video, please wait...</p>
+      </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- Footer -->
+    <footer id="footer">
+      <p>&copy; 2025 Take-A-Note. Built with Hyperspace.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script>
+    // Update the custom file button label with the selected file name.
+    document.getElementById('video-input').addEventListener('change', function(e) {
+      var fileName = e.target.files.length > 0 ? e.target.files[0].name : 'Select Video';
+      document.getElementById('file-label-text').textContent = fileName;
+    });
+  </script>
 </body>
 </html>

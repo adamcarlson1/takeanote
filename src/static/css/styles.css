@@ -1,0 +1,197 @@
+/* Dynamic Moving Background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -1;
+    animation: moveBg 30s linear infinite;
+  }
+  
+  @keyframes moveBg {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-10%, -10%);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  /* General Styles */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(180deg, #1a001f, #3d0c4a, #6b2477, #a34b9d, #e6b2cf);
+    color: white;
+    text-align: center;
+    transition: background 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Header */
+  #header {
+    padding: 40px 0;
+    background: transparent;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 3em;
+    font-weight: bold;
+    color: #e6b2cf;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 1.2em;
+    color: #a34b9d;
+    margin: 0 0 30px 0;
+  }
+  
+  /* Upload Section */
+  .upload-section {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    border: 2px solid #6b2477;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+  }
+  
+  .upload-section:hover {
+    transform: scale(1.02);
+  }
+  
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Custom File Upload Button */
+  .custom-file-upload {
+    display: inline-block;
+    background: linear-gradient(90deg, #6b2477, #a34b9d);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid #e6b2cf;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  
+  .custom-file-upload:hover {
+    background: linear-gradient(90deg, #3d0c4a, #6b2477);
+    transform: scale(1.05);
+  }
+  
+  .custom-file-upload input {
+    display: none;
+  }
+  
+  /* Output Sections */
+  .output-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #6b2477;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  
+  .output-box {
+    background: rgba(26, 0, 31, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 1em;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #a34b9d;
+  }
+  
+  /* Quiz Section */
+  .quiz-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .quiz-item {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e6b2cf;
+    transition: transform 0.3s;
+  }
+  
+  .quiz-item:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Buttons */
+  .button {
+    background: linear-gradient(90deg, #6b2477, #a34b9d);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid #e6b2cf;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .button:hover {
+    background: linear-gradient(90deg, #3d0c4a, #6b2477);
+    transform: scale(1.05);
+  }
+  
+  /* Footer */
+  #footer {
+    padding: 20px 0;
+    background: transparent;
+    text-align: center;
+  }
+  
+  /* Loading Indicator */
+  .loading-indicator {
+    font-size: 1.2em;
+    color: #e6b2cf;
+    margin: 20px 0;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

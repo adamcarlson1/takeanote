@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture Results - Take-A-Note</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <h1 class="title">Lecture Results</h1>
+      <p class="subtitle">Here are your lecture summary and full notes.</p>
+    </header>
+    
+    <!-- Main Content -->
+    <div id="main">
+      <!-- Transcription Section -->
+      <section class="output-section">
+        <h2>Lecture Transcription</h2>
+        <div class="output-box">{{ transcription }}</div>
+      </section>
+      
+      <!-- Lecture Summary Section -->
+      <section class="output-section">
+        <h2>Lecture Summary</h2>
+        <div class="output-box">
+          {% for line in notes.detailed_notes.split('\n') %}
+            <p>{{ line }}</p>
+          {% endfor %}
+        </div>
+      </section>
+      
+      <!-- Quiz Questions Section -->
+      {% if quiz %}
+      <section class="output-section">
+        <h2>Quiz Questions</h2>
+        <ul class="quiz-list">
+          {% for question in quiz %}
+            <li class="quiz-item">{{ question }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+      
+      <!-- Back Home Button -->
+      <a href="{{ url_for('main.index') }}" class="button">Back Home</a>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="footer">
+      <p>&copy; 2025 Take-A-Note. Built with Hyperspace.</p>
+    </footer>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
