@@ -84,7 +84,7 @@ if __name__ == "__main__":
     transcriber = AudioTranscriber()
 
     # Provide your test audio file path here
-    audio_path = "./../data/uploads/ProductiityPhone.mp4"  
+    audio_path = "./../data/uploads/ProductivityPhone.mp4"  
     transcript_file = transcriber.process_audio(audio_path)
 
     print(f"Transcript saved to: {transcript_file}")
