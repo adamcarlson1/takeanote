@@ -1,0 +1,31 @@
+# --- macOS Files ---
+.DS_Store
+../.DS_Store
+data/.DS_Store
+app/.DS_Store
+app/.env
+
+# --- Python ---
+__pycache__/
+app/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.env
+venv/
+.env.local
+.env.development
+.env.production
+.env.test
+
+# --- Data Folders ---
+data/session_files/
+data/uploads/
+
+# --- Miscellaneous ---
+*.log
+*.swp
+*.swo
+*.tmp
