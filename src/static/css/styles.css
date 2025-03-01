@@ -6,14 +6,13 @@ body::before {
     left: 0;
     width: 110%;
     height: 110%;
-    background: url('static/images/background.jpg') no-repeat center center fixed;
+    background: url('../images/background.jpg') no-repeat center center fixed;
     background-size: cover;
     filter: blur(8px);
     z-index: -1;
     animation: moveBg 30s linear infinite;
   }
   
-  /* Keyframes for background movement */
   @keyframes moveBg {
     0% {
       transform: translate(0, 0);
@@ -29,7 +28,6 @@ body::before {
   /* General Styles */
   body {
     font-family: 'Roboto', sans-serif;
-    /* Fallback gradient */
     background: linear-gradient(180deg, #1a001f, #3d0c4a, #6b2477, #a34b9d, #e6b2cf);
     color: white;
     text-align: center;
@@ -55,13 +53,13 @@ body::before {
     color: #e6b2cf;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 20px;  /* Added spacing to separate title from subtitle */
+    margin-bottom: 20px;
   }
   
   .subtitle {
     font-size: 1.2em;
     color: #a34b9d;
-    margin: 0 0 30px 0;  /* Ensures the description sits below with enough bottom spacing */
+    margin: 0 0 30px 0;
   }
   
   /* Upload Section */
@@ -168,6 +166,8 @@ body::before {
     border: 2px solid #e6b2cf;
     font-size: 1.1em;
     font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
   }
   
   .button:hover {
@@ -180,5 +180,18 @@ body::before {
     padding: 20px 0;
     background: transparent;
     text-align: center;
+  }
+  
+  /* Loading Indicator */
+  .loading-indicator {
+    font-size: 1.2em;
+    color: #e6b2cf;
+    margin: 20px 0;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
   

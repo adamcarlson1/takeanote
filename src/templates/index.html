@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Take-A-Note</title>
-  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <div id="wrapper">
     <!-- Header -->
     <header id="header">
       <h1 class="title">Take-A-Note</h1>
-      <p class="subtitle">Upload lecture videos and generate notes & quizzes instantly.</p>
+      <p class="subtitle">Upload lecture videos and generate notes &amp; quizzes instantly.</p>
     </header>
 
     <!-- Main Content -->
@@ -19,16 +19,19 @@
       <!-- Upload Section -->
       <section class="upload-section">
         <h2>Upload Lecture Video</h2>
-        <form action="/" method="post" enctype="multipart/form-data" class="upload-form">
-          <label for="video-input" class="custom-file-upload">
+        <form action="{{ url_for('main.index') }}" method="post" enctype="multipart/form-data" class="upload-form">
+          <label for="video-input" class="custom-file-upload" id="file-label">
             <span>Select Video</span>
             <input type="file" name="video" id="video-input" accept="video/*" required>
           </label>
-          <button type="submit" class="button primary">Upload & Process</button>
+          <button type="submit" class="button primary">Upload &amp; Process</button>
         </form>
       </section>
 
-      <!-- (Optional) Transcription, Notes, and Quiz Sections would go here -->
+      <!-- Loading Indicator -->
+      <div id="loading-indicator" class="loading-indicator" style="display: none;">
+        <p>Processing your video, please wait...</p>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -38,6 +41,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="static/js/scripts.js"></script>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
