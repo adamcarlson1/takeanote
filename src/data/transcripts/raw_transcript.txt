@@ -1,0 +1,11 @@
+Um, so today we are going to talk about Newton’s Second Law. Uh, you know, it's basically about how force, mass, and acceleration are related. Like, if you increase the force on an object, it accelerates more. Actually, the formula is F = ma, where F is force, m is mass, and a is acceleration.
+
+Right, so an example problem would be: If a 10 kg object experiences a force of 50 Newtons, what is its acceleration? You just use the formula, so acceleration is force divided by mass, which is 50 N divided by 10 kg, so, um, it's 5 m/s².
+
+Another key concept is friction. Friction is a force that opposes motion. There are two main types: static friction, which prevents objects from moving, and kinetic friction, which resists motion once the object is already moving.
+
+I mean, basically, in real life, friction helps us walk, drive cars, and hold things. Without friction, we would, uh, just slip all the time.
+
+Oh, and one more thing! If multiple forces act on an object, the net force is the vector sum of all forces acting on it. If the forces are balanced, there’s no acceleration.
+
+So, yeah, that's pretty much it for Newton's Second Law.
