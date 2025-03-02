@@ -1,5 +1,6 @@
 import os
 import logging
+import glob
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -81,10 +82,20 @@ class AudioTranscriber:
 
 
 if __name__ == "__main__":
-    transcriber = AudioTranscriber()
+    # Dynamically determine the uploads folder path
+    uploads_folder = os.path.abspath(os.path.join(os.getcwd(), "./../data/uploads/"))
+    
+    # Find all MP4 files in the uploads folder
+    mp4_files = glob.glob(os.path.join(uploads_folder, "*.mp4"))
+    
+    if not mp4_files:
+        print("No MP4 files found in the uploads folder.")
+    else:
+        # Get the most recently modified MP4 file
+        latest_video = max(mp4_files, key=os.path.getmtime)
+        print(f"Latest video found: {latest_video}")
 
-    # Provide your test audio file path here
-    audio_path = "./../data/uploads/ProductivityPhone.mp4"  
-    transcript_file = transcriber.process_audio(audio_path)
-
-    print(f"Transcript saved to: {transcript_file}")
+        # Create an instance of the AudioTranscriber and process the audio
+        transcriber = AudioTranscriber()
+        transcript_file = transcriber.process_audio(latest_video)
+        print(f"Transcript saved to: {transcript_file}")
