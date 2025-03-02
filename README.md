@@ -27,7 +27,6 @@ Ensure you have the following dependencies installed before running the applicat
 - [OpenAI](https://pypi.org/project/openai/) - API for AI models
 - [Whisper](https://github.com/openai/whisper) - Speech-to-text processing
 - [Transformers](https://huggingface.co/docs/transformers/) - NLP tasks
-- [Torch](https://pytorch.org/) - Deep learning framework
 - [OS](https://docs.python.org/3/library/os.html) - Standard Python module for system operations
 - [Logging](https://docs.python.org/3/library/logging.html) - Logging support
 - [JSON](https://docs.python.org/3/library/json.html) - Parsing and handling JSON data
